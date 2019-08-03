@@ -1,0 +1,171 @@
+//Program:Black Jack
+//File:deck.cpp
+//Name: Andrew Collins
+//Date: 4/24/2016
+//Description: 
+#include <iostream>
+#include <ctime>//srand
+#include <cstdlib>
+#include "deck.h"
+
+
+using namespace std;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:set the deck, not shuffled
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+deck::deck():num_cards(0){
+
+  int c=0;//loction of card in array
+
+   //set the suit of ech card
+   for(int s=1;s<5;s++){
+      //set the card value 2-10 equals their value ,
+      //11=Jack 12= Queen 13=King 14= Ace
+      for(int v=2;v<15;v++){
+	 cards[c].value=v;
+	 cards[c].suit=s;
+	 c++;
+      }
+   }
+
+   set_deck();
+}
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:destructor for deck class
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+deck::~deck(){
+
+}
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:resets deck
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+void deck::reset(){
+set_deck();
+num_cards=0;
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:shuffles the deck
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+void deck::set_deck(){
+
+   srand(time(NULL));
+   int random_num;//number in arry to swith cards
+   card c_temp; //will hold card card to be switched
+
+   for(int s=0;s<5;s++)
+   for(int i=0;i<52;i++){//goes through array and swithes card location based on the random number 
+      random_num=rand()%52;
+      c_temp=cards[i];
+      cards[i]=cards[random_num];
+      cards[random_num]=c_temp;
+   }
+num_cards=0;
+}
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:returns card pointer
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+card *deck::get_deck(){
+
+return cards;
+
+}
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:set the number of cards, add 1 after ever card is delt
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+void deck::set_num_cards(int num){
+
+num_cards+=num;
+
+}
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:return the number of card left in the deck
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+ int deck::get_num_cards(){//returns number of cards
+return num_cards;
+ }
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//Function name:
+//Description:get a single card from the deck
+//Pre-Condition:
+//Post-Conditoin:
+//Return:
+card deck::get_card(){
+
+
+if(num_cards==50){
+num_cards=0;
+}
+
+num_cards++;//0 is the burn card
+return cards[num_cards];
+
+}

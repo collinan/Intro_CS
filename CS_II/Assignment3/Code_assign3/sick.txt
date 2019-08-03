@@ -1,0 +1,4 @@
+It is too cold outside.
+It is too hot outside.
+The zoo found chemicals in the water.
+The animals are stressed.
